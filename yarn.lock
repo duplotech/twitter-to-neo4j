@@ -395,6 +395,12 @@ debug@^2.6.0:
   dependencies:
     ms "0.7.2"
 
+debug@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
+  dependencies:
+    ms "0.7.2"
+
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
@@ -1206,12 +1212,12 @@ standard-version@^4.0.0:
     semver "^5.1.0"
     yargs "^6.0.0"
 
-stream-to-neo4j@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.0.2.tgz#fe32005978b792bd7aa429da9e69de2c27ff8320"
+stream-to-neo4j@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.0.3.tgz#08a01f5045eb2f13faa04a0ad43da61133b74e9a"
   dependencies:
     cypher-stream "^1.0.1"
-    debug "^2.6.0"
+    debug "^2.6.1"
     tap-stream "^0.2.0"
     through2-map "^3.0.0"
 

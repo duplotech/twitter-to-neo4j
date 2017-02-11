@@ -3,6 +3,12 @@
 const debug = require('debug')('twitter-to-neo4j:daemon');
 const map = require('through2-map');
 const tap = require('tap-stream');
+const {
+  createStreamToDatabase,
+  createNodeStatement,
+  createRelationshipStatement,
+  withCommit
+} = require('stream-to-neo4j');
 
 const {
   createAmqpStream,
@@ -18,12 +24,39 @@ const toErrorLog = console.error.bind(console);
 
 const output = process.stdout;
 
+const toTweet = message => {
+  const owner = message._context.payload.username;
+  const tweet = {
+    screenName: message.data.screenName,
+    id: message.data.id,
+    time: message.data.time,
+    text: message.data.text
+  };
+  return [
+    createNodeStatement({ label: 'User', props: { screenName: owner }, idName: 'screenName' }),
+    createNodeStatement({ label: 'Tweet', props: tweet, idName: 'id' }),
+    withCommit(
+      createRelationshipStatement({
+        left: { label: 'User', id: owner, idName: 'screenName' },
+        right: { label: 'Tweet', id: tweet.id, idName: 'id' },
+        type: 'TWEETED',
+        direction: 'DIRECTION_RIGHT'
+      })
+    )
+  ];
+};
+const streamToDatabase = createStreamToDatabase(
+  { url: 'bolt://localhost', username: 'neo4j', password: 'neo4j-password' },
+  { tweet: toTweet }
+);
+
 createAmqpStream(config)
   .then(rpc =>
-    rpc
-      .pipe(parse)
-      .pipe(emitFromStream(streams))
-      .pipe(toDebugLog)
-      // .pipe(output)
+    streamToDatabase(
+      rpc
+        .pipe(parse)
+        .pipe(emitFromStream(streams))
+        .pipe(toDebugLog)
+    )
   )
   .catch(toErrorLog);
