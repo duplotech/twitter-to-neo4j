@@ -521,6 +521,13 @@ findup@0.1.5:
     colors "~0.6.0-1"
     commander "~2.1.0"
 
+flush-write-stream@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.2.tgz#c81b90d8746766f1a609a46809946c45dd8ae417"
+  dependencies:
+    inherits "^2.0.1"
+    readable-stream "^2.0.4"
+
 fs-access@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fs-access/-/fs-access-1.0.1.tgz#d6a87f262271cefebec30c553407fb995da8777a"
@@ -1071,7 +1078,7 @@ read-pkg@^1.0.0, read-pkg@^1.1.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
-readable-stream@^2.0.2, readable-stream@^2.1.5, readable-stream@^2.2.2:
+readable-stream@^2.0.2, readable-stream@^2.0.4, readable-stream@^2.1.5, readable-stream@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.2.tgz#a9e6fec3c7dda85f8bb1b3ba7028604556fc825e"
   dependencies:
@@ -1212,12 +1219,13 @@ standard-version@^4.0.0:
     semver "^5.1.0"
     yargs "^6.0.0"
 
-stream-to-neo4j@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.0.3.tgz#08a01f5045eb2f13faa04a0ad43da61133b74e9a"
+stream-to-neo4j@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.0.7.tgz#d1704f7f42bac97c93cb93061a537855361c6933"
   dependencies:
     cypher-stream "^1.0.1"
     debug "^2.6.1"
+    flush-write-stream "^1.0.2"
     tap-stream "^0.2.0"
     through2-map "^3.0.0"
 

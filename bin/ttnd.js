@@ -6,8 +6,7 @@ const tap = require('tap-stream');
 const {
   createStreamToDatabase,
   createNodeStatement,
-  createRelationshipStatement,
-  withCommit
+  createRelationshipStatement
 } = require('stream-to-neo4j');
 
 const {
@@ -35,19 +34,19 @@ const toTweet = message => {
   return [
     createNodeStatement({ label: 'User', props: { screenName: owner }, idName: 'screenName' }),
     createNodeStatement({ label: 'Tweet', props: tweet, idName: 'id' }),
-    withCommit(
-      createRelationshipStatement({
-        left: { label: 'User', id: owner, idName: 'screenName' },
-        right: { label: 'Tweet', id: tweet.id, idName: 'id' },
-        type: 'TWEETED',
-        direction: 'DIRECTION_RIGHT'
-      })
-    )
+    createRelationshipStatement({
+      left: { label: 'User', id: owner, idName: 'screenName' },
+      right: { label: 'Tweet', id: tweet.id, idName: 'id' },
+      type: 'TWEETED',
+      direction: 'DIRECTION_RIGHT'
+    })
   ];
 };
+const toFinished = () => ({ commit: true });
+
 const streamToDatabase = createStreamToDatabase(
   { url: 'bolt://localhost', username: 'neo4j', password: 'neo4j-password' },
-  { tweet: toTweet }
+  { tweet: toTweet, finished: toFinished }
 );
 
 createAmqpStream(config)
