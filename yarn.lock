@@ -389,13 +389,7 @@ dateformat@^1.0.11, dateformat@^1.0.12:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
-debug@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
-  dependencies:
-    ms "0.7.2"
-
-debug@^2.6.1:
+debug@^2.6.0, debug@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
@@ -1125,9 +1119,9 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-scrape-twitter@^0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/scrape-twitter/-/scrape-twitter-0.8.4.tgz#996f9d187958ce38c1ab969b38a01c38ed0ff086"
+scrape-twitter@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/scrape-twitter/-/scrape-twitter-0.8.6.tgz#94ff7d632ded51dff096ec673d437f165f5f50c4"
   dependencies:
     JSONStream "^1.3.0"
     cheerio "^0.22.0"
