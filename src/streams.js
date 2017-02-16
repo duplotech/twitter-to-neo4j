@@ -12,11 +12,17 @@ const {
 class ProfileStream extends Readable {
 
   constructor(username) {
-    super({ objectMode: true })
-    this.username = username
+    super({ objectMode: true });
+    this.username = username;
+    this.isRead = false;
   }
 
   _read() {
+    if (this.isRead) {
+      return false;
+    }
+
+    this.isRead = true;
     getUserProfile(this.username)
       .then(profile => {
         this.push(profile);
