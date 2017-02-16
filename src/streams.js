@@ -39,17 +39,17 @@ const streams = {
   likes: {
     class: LikeStream,
     toArgs: (payload) => [ payload.username, { count: payload.count, env: process.env } ],
-    type: 'tweet'
+    type: 'tweet-like'
   },
   followers: {
     class: ConnectionStream,
     toArgs: (payload) => [ payload.username, 'followers', process.env ],
-    type: 'micro-profile'
+    type: 'profile-connection'
   },
   following: {
     class: ConnectionStream,
     toArgs: (payload) => [ payload.username, 'following', process.env ],
-    type: 'micro-profile'
+    type: 'profile-connection'
   },
   conversation: {
     class: ConversationStream,
