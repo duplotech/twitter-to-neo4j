@@ -42,33 +42,7 @@ const toTweet = message => {
     })
   ];
 };
-const toFollowers = message => {
-  const owner = message._context.payload.username;
-  const follower = {
-    screenName: message.data.screenName,
-    name: message.data.name,
-    profileImage: message.data.profileImage,
-    bio: message.data.bio
-  };
-  return [
-    createNodeStatement({ label: 'User', props: { screenName: owner }, idName: 'screenName' }),
-    createNodeStatement({ label: 'User', props: follower, idName: 'screenName' }),
-    createRelationshipStatement({
-      left: { label: 'User', id: owner, idName: 'screenName' },
-      right: { label: 'User', id: follower.screenName, idName: 'screenName' },
-      type: 'FOLLOWS',
-      direction: 'DIRECTION_LEFT'
-    })
-  ];
-};
-const toFollowing = message => {
-  const follower = { screenName: message._context.payload.username };
-  const following = {
-    screenName: message.data.screenName,
-    name: message.data.name,
-    profileImage: message.data.profileImage,
-    bio: message.data.bio
-  };
+const createUserConnectionStatements = (following, follower) => {
   return [
     createNodeStatement({ label: 'User', props: following, idName: 'screenName' }),
     createNodeStatement({ label: 'User', props: follower, idName: 'screenName' }),
@@ -79,6 +53,26 @@ const toFollowing = message => {
       direction: 'DIRECTION_LEFT'
     })
   ];
+};
+const toFollowers = message => {
+  const following = { screenName: message._context.payload.username };
+  const follower = {
+    screenName: message.data.screenName,
+    name: message.data.name,
+    profileImage: message.data.profileImage,
+    bio: message.data.bio
+  };
+  return createUserConnectionStatements(following, follower);
+};
+const toFollowing = message => {
+  const following = {
+    screenName: message.data.screenName,
+    name: message.data.name,
+    profileImage: message.data.profileImage,
+    bio: message.data.bio
+  };
+  const follower = { screenName: message._context.payload.username };
+  return createUserConnectionStatements(following, follower);
 };
 const toFinished = () => ({ commit: true });
 
