@@ -166,7 +166,7 @@ createAmqpStream(config)
   .then(rpc =>
     streamToDatabase(
       rpc.pipe(parse).pipe(emitFromStream(streams)).pipe(toDebugLog),
-      100
+      10
     )
   )
   .catch(toErrorLog);
