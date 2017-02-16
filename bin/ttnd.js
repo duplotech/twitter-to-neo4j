@@ -42,11 +42,54 @@ const toTweet = message => {
     })
   ];
 };
+const toFollowers = message => {
+  const owner = message._context.payload.username;
+  const follower = {
+    screenName: message.data.screenName,
+    name: message.data.name,
+    profileImage: message.data.profileImage,
+    bio: message.data.bio
+  };
+  return [
+    createNodeStatement({ label: 'User', props: { screenName: owner }, idName: 'screenName' }),
+    createNodeStatement({ label: 'User', props: follower, idName: 'screenName' }),
+    createRelationshipStatement({
+      left: { label: 'User', id: owner, idName: 'screenName' },
+      right: { label: 'User', id: follower.screenName, idName: 'screenName' },
+      type: 'FOLLOWS',
+      direction: 'DIRECTION_LEFT'
+    })
+  ];
+};
+const toFollowing = message => {
+  const follower = { screenName: message._context.payload.username };
+  const following = {
+    screenName: message.data.screenName,
+    name: message.data.name,
+    profileImage: message.data.profileImage,
+    bio: message.data.bio
+  };
+  return [
+    createNodeStatement({ label: 'User', props: following, idName: 'screenName' }),
+    createNodeStatement({ label: 'User', props: follower, idName: 'screenName' }),
+    createRelationshipStatement({
+      left: { label: 'User', id: following.screenName, idName: 'screenName' },
+      right: { label: 'User', id: follower.screenName, idName: 'screenName' },
+      type: 'FOLLOWS',
+      direction: 'DIRECTION_LEFT'
+    })
+  ];
+};
 const toFinished = () => ({ commit: true });
 
 const streamToDatabase = createStreamToDatabase(
   { url: 'bolt://localhost', username: 'neo4j', password: 'neo4j-password' },
-  { tweet: toTweet, finished: toFinished }
+  {
+    'tweet': toTweet,
+    'profile-connection-followers': toFollowers,
+    'profile-connection-following': toFollowing,
+    'finished': toFinished
+  }
 );
 
 createAmqpStream(config)

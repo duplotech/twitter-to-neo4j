@@ -44,12 +44,12 @@ const streams = {
   followers: {
     class: ConnectionStream,
     toArgs: (payload) => [ payload.username, 'followers', process.env ],
-    type: 'profile-connection'
+    type: 'profile-connection-followers'
   },
   following: {
     class: ConnectionStream,
     toArgs: (payload) => [ payload.username, 'following', process.env ],
-    type: 'profile-connection'
+    type: 'profile-connection-following'
   },
   conversation: {
     class: ConversationStream,
