@@ -165,10 +165,8 @@ const streamToDatabase = createStreamToDatabase(
 createAmqpStream(config)
   .then(rpc =>
     streamToDatabase(
-      rpc
-        .pipe(parse)
-        .pipe(emitFromStream(streams))
-        .pipe(toDebugLog)
+      rpc.pipe(parse).pipe(emitFromStream(streams)).pipe(toDebugLog),
+      100
     )
   )
   .catch(toErrorLog);

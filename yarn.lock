@@ -1213,9 +1213,9 @@ standard-version@^4.0.0:
     semver "^5.1.0"
     yargs "^6.0.0"
 
-stream-to-neo4j@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.0.7.tgz#d1704f7f42bac97c93cb93061a537855361c6933"
+stream-to-neo4j@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/stream-to-neo4j/-/stream-to-neo4j-0.1.0.tgz#8f06eca151f18462391f76017440103cfca87a88"
   dependencies:
     cypher-stream "^1.0.1"
     debug "^2.6.1"
