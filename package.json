@@ -10,7 +10,7 @@
   "license": "MIT",
   "bin": {
     "twitter-to-neo4j": "./bin/twitter-to-neo4j.js",
-    "ttnd": "./bin/ttnd.js"
+    "twitter-to-neo4j-daemon": "./bin/twitter-to-neo4j-daemon.js"
   },
   "engines": {
     "node": ">=6"

@@ -10,9 +10,9 @@ const toCommand = (type, toPayload = identity) =>
   map.obj(line => ({ type: 'command', command: type, payload: toPayload(line) }));
 
 const createToCommands = (type, toPayload = identity) => input =>
-    input
-      .pipe(toLine)
-      .pipe(isNonEmptyLine)
-      .pipe(toCommand(type, toPayload));
+  input
+    .pipe(toLine)
+    .pipe(isNonEmptyLine)
+    .pipe(toCommand(type, toPayload));
 
 module.exports = createToCommands;

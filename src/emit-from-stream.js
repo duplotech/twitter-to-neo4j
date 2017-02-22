@@ -22,7 +22,6 @@ function messageToType(streams = {}, message) {
 }
 
 const emitFromStream = streams => through.obj(function (message, encoding, callback) {
-
   const _context = Object.assign({}, message);
   const type = messageToType(streams, message);
   const stream = messageToStream(streams, message);
